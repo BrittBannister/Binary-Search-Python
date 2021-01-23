@@ -1,3 +1,7 @@
+import random
+import time
+
+
 def naive_search(lst, target):
     for i in range(len(lst)):
         if lst[i] == target:
@@ -25,7 +29,27 @@ def binary_search(lst, target, low=None, high=None):
 
 
 if __name__ == '__main__':
-    lst = [1, 3, 5, 10, 12]
-    target = 10
-    print(naive_search(lst, target))
-    print(binary_search(lst, target))
+    # lst = [1, 3, 5, 10, 12]
+    # target = 10
+    # print(naive_search(lst, target))
+    # print(binary_search(lst, target))
+
+    length = 10000
+    sorted_lst = set()
+    while len(sorted_lst) < length:
+        sorted_lst.add(random.randint(-3*length, 3*length))
+    sorted_lst = sorted(list(sorted_lst))
+
+    start = time.time()
+    for target in sorted_lst:
+        naive_search(sorted_lst, target)
+    end = time.time()
+    total_time = (end - start)/length
+    print(f'Naive Search Time: {total_time} seconds.')
+
+    start = time.time()
+    for target in sorted_lst:
+        binary_search(sorted_lst, target)
+    end = time.time()
+    total_time = (end - start)/length
+    print(f'Binary Search Time: {total_time} seconds.')
